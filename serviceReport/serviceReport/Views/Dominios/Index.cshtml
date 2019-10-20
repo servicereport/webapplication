@@ -1,237 +1,65 @@
 ﻿@model IEnumerable<serviceReport.Models.ISO.Dominio>
 
 @{
-  ViewBag.Title = "Index";
+    ViewBag.Title = "Dominios";
 }
-
-<h2>Index</h2>
-
-<p>
-  @Html.ActionLink("Agregar", "Create")
-</p>
-<table class="table">
-  <tr>
-    <th>
-      @Html.DisplayNameFor(model => model.Identificador)
-    </th>
-    <th>
-      @Html.DisplayNameFor(model => model.NombreDominio)
-    </th>
-    <th></th>
-  </tr>
-
-  @foreach (var item in Model)
-  {
-    <tr>
-      <td>
-        @Html.DisplayFor(modelItem => item.Identificador).@Html.DisplayFor(modelItem => item.Consecutivo)
-      </td>
-      <td>
-        @Html.DisplayFor(modelItem => item.NombreDominio)
-      </td>
-      <td>
-        @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-        @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
-        @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
-      </td>
-    </tr>
-  }
-
-</table>
-
-<div id="aspect-content">
-  <div class="aspect-tab ">
-    <input id="item-18" type="checkbox" class="aspect-input" name="aspect">
-    <label for="item-18" class="aspect-label"></label>
-    <div class="aspect-content">
-      <div class="aspect-info">
-        <div class="chart-pie negative over50">
-          <span class="chart-pie-count">-69</span>
-          <div>
-            <div class="first-fill"></div>
-            <div class="second-fill" style="transform: rotate(249deg)"></div>
-          </div>
-        </div>
-        <span class="aspect-name">Lorem ipsum</span>
-      </div>
-      <div class="aspect-stat">
-        <div class="all-opinions">
-          <span class="all-opinions-count">18</span>
-          <span>opinion</span>
-        </div>
-        <div>
-          <span class="positive-count">4</span>
-          <span class="neutral-count">1</span>
-          <span class="negative-count">13</span>
-        </div>
-      </div>
+<div class="all-title-box">
+    <div class="container text-center">
+        <h1>Dominios<span class="m_1">A continuación se detallan los dominios de la norma.</span></h1>
     </div>
-    <div class="aspect-tab-content">
-      <div class="sentiment-wrapper">
-        <div>
-          <div>
-            <div class="positive-count opinion-header">
-              <span>positive</span>
-              <span>4</span>
-            </div>
-            <div>
-              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.</span>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div>
-            <div class="neutral-count opinion-header">
-              <span>neutral</span>
-              <span>1</span>
-            </div>
-            <div>
-              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.</span>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div>
-            <div class="negative-count opinion-header">
-              <span>negative</span>
-              <span>13</span>
-            </div>
-            <div>
-              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="aspect-tab ">
-    <input id="item-14" type="checkbox" class="aspect-input" name="aspect">
-    <label for="item-14" class="aspect-label"></label>
-    <div class="aspect-content">
-      <div class="aspect-info">
-        <div class="chart-pie positive over50">
-          <span class="chart-pie-count">58</span>
-          <div>
-            <div class="first-fill"></div>
-            <div class="second-fill" style="transform: rotate(209deg)"></div>
-          </div>
-        </div>
-        <span class="aspect-name">Lorem ipsum dolor sit amet</span>
-      </div>
-      <div class="aspect-stat">
-        <div class="all-opinions">
-          <span class="all-opinions-count">22</span>
-          <span>opinion</span>
-        </div>
-        <div>
-          <span class="positive-count">12</span>
-          <span class="neutral-count">5</span>
-          <span class="negative-count">5</span>
-        </div>
-      </div>
-    </div>
-    <div class="aspect-tab-content">
-      <div class="sentiment-wrapper">
-        <div>
-          <div>
-            <div class="positive-count opinion-header">
-              <span>positive</span>
-              <span>12</span>
-            </div>
-            <div>
-              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.</span>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div>
-            <div class="neutral-count opinion-header">
-              <span>neutral</span>
-              <span>5</span>
-            </div>
-            <div>
-              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.</span>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div>
-            <div class="negative-count opinion-header">
-              <span>negative</span>
-              <span>5</span>
-            </div>
-            <div>
-              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="aspect-tab ">
-    <input id="item-2" type="checkbox" class="aspect-input" name="aspect">
-    <label for="item-2" class="aspect-label"></label>
-    <div class="aspect-content">
-      <div class="aspect-info">
-        <div class="chart-pie positive">
-          <span class="chart-pie-count">33</span>
-          <div>
-            <div class="first-fill"></div>
-            <div class="second-fill" style="transform: rotate(119deg)"></div>
-          </div>
-        </div>
-        <span class="aspect-name">Lorem</span>
-      </div>
-      <div class="aspect-stat">
-        <div class="all-opinions">
-          <span class="all-opinions-count">7</span>
-          <span>opinion</span>
-        </div>
-        <div>
-          <span class="positive-count">3</span>
-          <span class="neutral-count">2</span>
-          <span class="negative-count">2</span>
-        </div>
-      </div>
-    </div>
-    <div class="aspect-tab-content">
-      <div class="sentiment-wrapper">
-        <div>
-          <div>
-            <div class="positive-count opinion-header">
-              <span>positive</span>
-              <span>3</span>
-            </div>
-            <div>
-              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div>
-            <div class="neutral-count opinion-header">
-              <span>neutral</span>
-              <span>2</span>
-            </div>
-            <div>
-              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.</span>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div>
-            <div class="negative-count opinion-header">
-              <span>negative</span>
-              <span>2</span>
-            </div>
-            <div>
-              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 
+<p>
+    <div class="sign text-center pricing-table-sign-up">
+        <a href="Dominios/Create" class="btn btn-light btn-radius btn-brd grd1 effect-1">Agregar</a>
+    </div>
+</p>
+<div id="pricing-box" class="section wb">    
+
+
+    @foreach (var item in Model)
+    {
+        if (@ViewBag.id == null)
+        {
+            ViewBag.id = 0;
+        }
+
+        if (ViewBag.id == 0)
+        {
+            @:<div class='container'>
+            }
+
+            <div class='col-md-4 col-sm-6 col-xs-12'>
+                <div class="grid1">
+                    <span>@Html.DisplayFor(modelItem => item.Identificador).@Html.DisplayFor(modelItem => item.Consecutivo)</span>
+                    <div class="price-tit text-center">
+                        <h2>@Html.DisplayFor(modelItem => item.NombreDominio)</h2>
+                    </div>
+                    <div class="para">
+                        <p>1 Anexo</p>
+                        <p>10 Gripos</p>
+                        <p>50 Preguntas</p>
+                    </div>
+                    <div class="sign text-center pricing-table-sign-up">
+                        <a href="anexos.html" class="btn btn-light btn-radius btn-brd grd1 effect-1">Ver mas</a>
+                    </div>
+                </div>
+            </div>
+
+            if (ViewBag.id == 2)
+            {
+                @:<div class='clear'> </div>
+                @:</div>
+            ViewBag.id = 0;
+        }
+        else
+        {
+            ViewBag.id = ViewBag.id + 1;
+        }
+
+
+
+    }
+
+</div>
 
