@@ -1,0 +1,48 @@
+﻿@model serviceReport.Models.ISO.Dominio
+
+@{
+    ViewBag.Title = "Borrar";
+}
+
+<h2>Delete</h2>
+
+<h3>Confirma que desea borrar este registro?</h3>
+<div>
+    <h4>Dominio</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreDominio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreDominio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Identificador)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Identificador)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Consecutivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Consecutivo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Borrar" class="btn btn-danger" /> |
+            @Html.ActionLink("Volver", "Index")
+        </div>
+    }
+</div>

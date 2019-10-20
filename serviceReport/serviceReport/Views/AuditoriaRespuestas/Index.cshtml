@@ -1,0 +1,39 @@
+﻿@model IEnumerable<serviceReport.Models.Auditoria.AuditoriaRespuestas>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Agregar", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Calificacion.NombreNivel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pregunta.Descripcion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Calificacion.NombreNivel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pregunta.Descripcion)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Borrar", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

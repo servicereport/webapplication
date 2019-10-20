@@ -1,0 +1,42 @@
+﻿@model serviceReport.Models.ISO.Pregunta
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Pregunta</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GrupoPregunta.NombreGrupo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GrupoPregunta.NombreGrupo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Activo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Volver", "Index")
+</p>

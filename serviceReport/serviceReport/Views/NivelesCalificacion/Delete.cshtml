@@ -1,0 +1,48 @@
+﻿@model serviceReport.Models.ISO.NivelCalificacion
+
+@{
+    ViewBag.Title = "Borrar";
+}
+
+<h2>Delete</h2>
+
+<h3>Confirma que desea borrar este registro?</h3>
+<div>
+    <h4>NivelCalificacion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreNivel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreNivel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Porcentaje)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Porcentaje)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Criterio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Criterio)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Borrar" class="btn btn-danger" /> |
+            @Html.ActionLink("Volver", "Index")
+        </div>
+    }
+</div>

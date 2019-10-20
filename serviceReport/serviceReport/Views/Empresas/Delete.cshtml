@@ -1,0 +1,56 @@
+﻿@model serviceReport.Models.Auditoria.Empresa
+
+@{
+    ViewBag.Title = "Borrar";
+}
+
+<h2>Delete</h2>
+
+<h3>Confirma que desea borrar este registro?</h3>
+<div>
+    <h4>Empresa</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreEntidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreEntidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreContactoEntidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreContactoEntidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailEmpresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailEmpresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UrlLogo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UrlLogo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Borrar" class="btn btn-danger" /> |
+            @Html.ActionLink("Volver", "Index")
+        </div>
+    }
+</div>

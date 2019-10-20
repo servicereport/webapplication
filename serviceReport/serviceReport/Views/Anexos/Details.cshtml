@@ -1,0 +1,58 @@
+﻿@model serviceReport.Models.ISO.Anexo
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Anexo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Dominio.NombreDominio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dominio.NombreDominio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Consecutivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Consecutivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Activo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Volver", "Index")
+</p>

@@ -1,0 +1,34 @@
+﻿@model serviceReport.Models.Auditoria.DominiosAuditoria
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DominiosAuditoria</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Auditoria.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Auditoria.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dominio.NombreDominio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dominio.NombreDominio)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Volver", "Index")
+</p>

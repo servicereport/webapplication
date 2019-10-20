@@ -1,0 +1,64 @@
+﻿@model serviceReport.Models.ISO.Anexo
+
+@{
+    ViewBag.Title = "Borrar";
+}
+
+<h2>Delete</h2>
+
+<h3>Confirma que desea borrar este registro?</h3>
+<div>
+    <h4>Anexo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Dominio.NombreDominio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dominio.NombreDominio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Consecutivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Consecutivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Activo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Borrar" class="btn btn-danger" /> |
+            @Html.ActionLink("Volver", "Index")
+        </div>
+    }
+</div>

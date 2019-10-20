@@ -1,0 +1,50 @@
+﻿@model serviceReport.Models.Auditoria.Empresa
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Empresa</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreEntidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreEntidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreContactoEntidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreContactoEntidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailEmpresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailEmpresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UrlLogo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UrlLogo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Volver", "Index")
+</p>

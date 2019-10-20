@@ -1,0 +1,42 @@
+﻿@model serviceReport.Models.ISO.Dominio
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Dominio</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreDominio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreDominio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Identificador)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Identificador)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Consecutivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Consecutivo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Volver", "Index")
+</p>
