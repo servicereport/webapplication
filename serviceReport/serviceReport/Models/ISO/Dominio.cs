@@ -20,5 +20,7 @@ namespace serviceReport.Models.ISO
         [Required]
         public int Consecutivo { get; set; }
 
+        public ICollection<Anexo> Anexos { get; set; }
+
     }
 }
