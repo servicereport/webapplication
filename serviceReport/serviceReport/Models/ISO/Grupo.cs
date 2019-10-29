@@ -27,5 +27,7 @@ namespace serviceReport.Models.ISO
         public Anexo Anexo { get; set; }
 
         public int IdAnexo { get; set; }
+
+        public ICollection<Pregunta> Preguntas { get; set; }
     }
 }

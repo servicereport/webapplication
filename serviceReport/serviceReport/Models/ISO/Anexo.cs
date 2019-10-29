@@ -27,5 +27,7 @@ namespace serviceReport.Models.ISO
         public Dominio Dominio { get; set; }
 
         public int IdDominio { get; set; }
+
+        public ICollection<Grupo> Grupos { get; set; }
     }
 }
