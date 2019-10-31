@@ -4,17 +4,25 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Agregar", "Create")
-</p>
 
 <div class="all-title-box">
     <div class="container text-center">
         <h1>@Html.DisplayFor(model => model.Identificador).@Html.DisplayFor(model => model.Consecutivo)<span class="m_1">@Html.DisplayFor(model => model.NombreDominio)</span></h1>
     </div>
 </div>
+
+<script>
+    var idAnexo = 0;
+    function  SetAnexo(id){
+        idAnexo = id;
+        console.log(id);
+
+        //document.getElementById("btnAdd").setAttribute("href", "~/Grupos/Create?idAnexo=" + id);
+        document.getElementById("btnAdd").setAttribute("href", "../../Grupos/Create?idAnexo=" + id);
+
+    }
+</script>
 
 <div id="pricing" class="section lb">
     <div class="container">
@@ -30,7 +38,7 @@
                     {
 
                         @*<li class="active"><a href="#tab1" data-toggle="pill">@Html.DisplayFor(model => model.Identificador).@Html.DisplayFor(model => model.Consecutivo).@anexo.Consecutivo @anexo.Titulo</a></li>*@
-                        <li><a href='#tab_@anexo.Id' data-toggle="pill">@Html.DisplayFor(model => model.Identificador).@Html.DisplayFor(model => model.Consecutivo).@anexo.Consecutivo @anexo.Titulo</a></li>
+                        <li><a href='#tab_@anexo.Id' data-toggle="pill" onclick="SetAnexo(@anexo.Id)" >@Html.DisplayFor(model => model.Identificador).@Html.DisplayFor(model => model.Consecutivo).@anexo.Consecutivo @anexo.Titulo</a></li>
 
                 }
                     </ul>
@@ -46,40 +54,44 @@
 
                     <!--inicio del grupo-->
                     @foreach (var anexo in Model.Anexos)
-                    {
-                        @:<div class="tab-pane active fade in" id="tab_@anexo.Id">
-    @:<div class="row text-center">
+                {
+                    @:<div class="tab-pane active fade in" id="tab_@anexo.Id">
+                        @:<div class="row text-center">
 
 
-        foreach (var grupo in @anexo.Grupos)
-        {
-            @:<div class="col-md-6">
-                @:<div class="pricing-table pricing-table-highlighted">
-                    @:<div class="pricing-table-header grd1">
-                        @:<h2>A.5.1.1 @grupo.NombreGrupo</h2>
-                        @:<h3>@grupo.Preguntas.Count Preguntas</h3>
-                        @:<p>
-                            <a href="#editarGrupo1"><img src="~/content/images/application-edit-icon.png" />editar</a>
-                            @:</i>
-                            @:</p>
-                        @:</div>
-                    @:<div class="pricing-table-space"></div>
-                    @:<div class="pricing-table-features">
 
 
-    foreach (var pregunta in grupo.Preguntas)
-    {
-        @:<p><a href="#editarPregunta1"><img src="../../content/images/application-edit-icon.png" /></a> <strong>@pregunta.Descripcion </strong></p>
-    }
-    @:</div>
-                    @:<div class="pricing-table-sign-up">
-                        @:<a href="#addPregunta?id=1" data-scroll class="btn btn-light btn-radius btn-brd grd1 effect-1">Agregar Pregunta</a>
-                        @:</div>
-                    @:</div>
-                @:</div>
-        }
-        @:</div>
-    @:</div>
+                        foreach (var grupo in @anexo.Grupos)
+                        {
+                            @:<div class="col-md-6">
+                                @:<div class="pricing-table pricing-table-highlighted">
+                                    @:<div class="pricing-table-header grd1">
+                                        @:<h2>A.5.1.1 @grupo.NombreGrupo</h2>
+                                        @:<h3>@grupo.Preguntas.Count Preguntas</h3>
+                                        @:<p>
+                                            <a href="#editarGrupo1"><img src="~/content/images/application-edit-icon.png" />editar</a>
+                                            @:</i>
+                                            @:                                        </p>
+                                        @:                                    </div>
+                                    @:<div class="pricing-table-space"></div>
+                                    @:<div class="pricing-table-features">
+
+
+
+
+                                    foreach (var pregunta in grupo.Preguntas)
+                                    {
+                                        @:<p><a href="#editarPregunta1"><img src="../../content/images/application-edit-icon.png" /></a> <strong>@pregunta.Descripcion </strong></p>
+                                }
+                                @:                            </div>
+                            @:<div class="pricing-table-sign-up">
+                                @:<a href="#addPregunta?id=1" data-scroll class="btn btn-light btn-radius btn-brd grd1 effect-1">Agregar Pregunta</a>
+                                @:                            </div>
+                            @:                        </div>
+                        @:                    </div>
+            }
+            @:        </div>
+        @:    </div>
 }
                     <!--fin del grupo-->
                 </div><!-- end content -->
@@ -87,62 +99,16 @@
         </div><!-- end row -->
 
 
-
-
-
-        @*<div class="row">
-            <div class="col-md-12">
-                <div class="tab-content">
-                    <div class="row text-center">
-                        <div class="col-md-6">
-                            <div class="pricing-table pricing-table-highlighted">
-                                <div class="pricing-table-header grd1">
-                                    <h2>A.5.1.1 Grupo 3</h2>
-                                    <h3>5 Preguntas</h3>
-                                    <p><a href="#editarGrupo1"><img src="~/content/images/application-edit-icon.png" />editar</a></i></p>
-                                </div>
-                                <div class="pricing-table-space"></div>
-                                <div class="pricing-table-features">
-                                    <p><a href="editarPregunta1"><img src="~/content/images/application-edit-icon.png" /></a> <strong>1</strong> Primera pregunta del grupo</p>
-                                    <p><a href="editarPregunta2"><img src="~/content/images/application-edit-icon.png" /></a> <strong>2</strong> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-                                    <p><a href="editarPregunta3"><img src="~/content/images/application-edit-icon.png" /></a> <strong>3</strong> Primera pregunta del grupo</p>
-                                    <p><a href="editarPregunta4"><img src="~/content/images/application-edit-icon.png" /></a> <strong>4</strong> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
-                                    <p><a href="editarPregunta5"><img src="~/content/images/application-edit-icon.png" /></a> <strong>5</strong> Primera pregunta del grupo</p>
-                                </div>
-                                <div class="pricing-table-sign-up">
-                                    <a href="#addPregunta?id=1" data-scroll class="btn btn-light btn-radius btn-brd grd1 effect-1">Agregar Pregunta</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="pricing-table pricing-table-highlighted">
-                                <div class="pricing-table-header grd1">
-                                    <h2>A.5.1.2 Grupo 4</h2>
-                                    <h3>3 Preguntas</h3>
-                                    <p><a href="#editarGrupo2"><img src="~/content/images/application-edit-icon.png" />editar</a></i></p>
-                                </div>
-                                <div class="pricing-table-space"></div>
-                                <div class="pricing-table-features">
-                                    <p><a href="editarPregunta5"><img src="~/content/images/application-edit-icon.png" /></a> <strong>1</strong> Primera pregunta del grupo</p>
-                                    <p><a href="editarPregunta5"><img src="~/content/images/application-edit-icon.png" /></a> <strong>2</strong> Segunda pregunta del grupo</p>
-                                    <p><a href="editarPregunta5"><img src="~/content/images/application-edit-icon.png" /></a> <strong>3</strong> Tercera pregunta del grupo</p>
-                                </div>
-                                <div class="pricing-table-sign-up">
-                                    <a href="#addPregunta?id=2" data-scroll class="btn btn-light btn-radius btn-brd grd1 effect-1">Agregar Pregunta</a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div><!-- end row -->
-                    <div class="tab-pane fade" id="tab2">
-
-                    </div><!-- end pane -->
-                </div><!-- end content -->
-            </div><!-- end col -->
-        </div><!-- end row -->*@
-
-
-
+        <div class="btn-group addGruoup">
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Agregar
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="~/Dominios/Create">Dominio</a><br>
+                <a class="dropdown-item" href="~/Anexos/Create?idDominio=@Model.Id">Anexo</a><br>
+                <a class="dropdown-item" id="btnAdd" href="~/Grupos/Create?idDominio=@Model.Id&idAnexo="  >Grupo</a>
+            </div>
+        </div>
 
     </div><!-- end container -->
 </div><!-- end section -->
