@@ -40,7 +40,7 @@ namespace serviceReport.Controllers
 			else
 			{
 				Session["Usuario"] = user;
-				return RedirectToAction("Index", "Auditoria/Auditorias");
+				return RedirectToAction("Index", "Dominios/index");
 			}
         }
 
