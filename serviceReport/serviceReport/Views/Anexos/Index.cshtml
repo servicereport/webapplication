@@ -19,7 +19,7 @@
         console.log(id);
 
         //document.getElementById("btnAdd").setAttribute("href", "~/Grupos/Create?idAnexo=" + id);
-        document.getElementById("btnAdd").setAttribute("href", "../../Grupos/Create?idAnexo=" + id);
+        document.getElementById("btnAdd").setAttribute("href", "../../Grupos/Create?idDominio=@Model.Id&idAnexo=" + id);
 
     }
 </script>
@@ -35,12 +35,18 @@
                 <div class="message-box">
                     <ul class="nav nav-pills nav-stacked" id="myTabs">
                         @foreach (var anexo in Model.Anexos)
-                    {
+    {
 
-                        @*<li class="active"><a href="#tab1" data-toggle="pill">@Html.DisplayFor(model => model.Identificador).@Html.DisplayFor(model => model.Consecutivo).@anexo.Consecutivo @anexo.Titulo</a></li>*@
-                        <li><a href='#tab_@anexo.Id' data-toggle="pill" onclick="SetAnexo(@anexo.Id)" >@Html.DisplayFor(model => model.Identificador).@Html.DisplayFor(model => model.Consecutivo).@anexo.Consecutivo @anexo.Titulo</a></li>
-
-                }
+                    @*<li class="active"><a href="#tab1" data-toggle="pill">@Html.DisplayFor(model => model.Identificador).@Html.DisplayFor(model => model.Consecutivo).@anexo.Consecutivo @anexo.Titulo</a></li>*@
+                        @:<li>
+                            @:<a href='#tab_@anexo.Id' data-toggle="pill" onclick="SetAnexo(@anexo.Id)">@Html.DisplayFor(model => model.Identificador).@Html.DisplayFor(model => model.Consecutivo).@anexo.Consecutivo @anexo.Titulo</a>
+                            @:<p>
+                                @:<a href="../../Anexos/Edit?id=@anexo.Id"><img src="../../content/images/application-edit-icon.png" />editar</a>
+                                @:</i>
+                                @:
+                            @:</p>
+                        @:</li>
+}
                     </ul>
                 </div>
             </div>
@@ -69,9 +75,9 @@
                                         @:<h2>A.5.1.1 @grupo.NombreGrupo</h2>
                                         @:<h3>@grupo.Preguntas.Count Preguntas</h3>
                                         @:<p>
-                                            <a href="#editarGrupo1"><img src="~/content/images/application-edit-icon.png" />editar</a>
+                                            <a href="~/Grupos/Edit?id=@grupo.Id"><img src="~/content/images/application-edit-icon.png" />editar</a>
                                             @:</i>
-                                            @:                                        </p>
+                                        @:</p>
                                         @:                                    </div>
                                     @:<div class="pricing-table-space"></div>
                                     @:<div class="pricing-table-features">
@@ -81,11 +87,11 @@
 
                                     foreach (var pregunta in grupo.Preguntas)
                                     {
-                                        @:<p><a href="#editarPregunta1"><img src="../../content/images/application-edit-icon.png" /></a> <strong>@pregunta.Descripcion </strong></p>
+                                        @:<p><a href="~/Preguntas/Edit?idPregunta=@pregunta.Id"><img src="../../content/images/application-edit-icon.png" /></a> <strong>@pregunta.Descripcion </strong></p>
                                 }
                                 @:                            </div>
                             @:<div class="pricing-table-sign-up">
-                                @:<a href="#addPregunta?id=1" data-scroll class="btn btn-light btn-radius btn-brd grd1 effect-1">Agregar Pregunta</a>
+                                @:<a href="../../Preguntas/Create?idGrupo=@grupo.Id" data-scroll class="btn btn-light btn-radius btn-brd grd1 effect-1">Agregar Pregunta</a>
                                 @:                            </div>
                             @:                        </div>
                         @:                    </div>
@@ -106,7 +112,7 @@
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="~/Dominios/Create">Dominio</a><br>
                 <a class="dropdown-item" href="~/Anexos/Create?idDominio=@Model.Id">Anexo</a><br>
-                <a class="dropdown-item" id="btnAdd" href="~/Grupos/Create?idDominio=@Model.Id&idAnexo="  >Grupo</a>
+                <a class="dropdown-item" id="btnAdd" href="~/Grupos/Create?idDominio=@Model.Id&idAnexo=">Grupo</a>
             </div>
         </div>
 

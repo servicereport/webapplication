@@ -39,9 +39,9 @@ namespace serviceReport.Areas.ISO.Controllers
         }
 
         // GET: ISO/Preguntas/Create
-        public ActionResult Create()
+        public ActionResult Create(int idGrupo)
         {
-            ViewBag.IdGrupo = new SelectList(db.Grupos, "Id", "NombreGrupo");
+            ViewBag.IdGrupo = new SelectList(db.Grupos, "Id", "NombreGrupo", idGrupo);
             return View();
         }
 

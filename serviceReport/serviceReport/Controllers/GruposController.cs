@@ -39,10 +39,10 @@ namespace serviceReport.Areas.ISO.Controllers
         }
 
         // GET: ISO/Grupos/Create
-        public ActionResult Create()
+        public ActionResult Create(int idDominio, int idAnexo)
         {
-            ViewBag.IdAnexo = new SelectList(db.Anexos, "Id", "Titulo");
-            ViewBag.IdDominio = new SelectList(db.Dominios, "Id", "NombreDominio");
+            ViewBag.IdAnexo = new SelectList(db.Anexos, "Id", "Titulo", idAnexo);
+            ViewBag.IdDominio = new SelectList(db.Dominios, "Id", "NombreDominio", idDominio);
             return View();
         }
 
