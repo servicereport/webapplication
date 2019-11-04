@@ -4,49 +4,65 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="all-title-box">
+    <div class="container text-center">
+        <h1>Empresas<span class="m_1">A continuación se detallan las empresas registradas.</span></h1>
+    </div>
+</div>
 
 <p>
-    @Html.ActionLink("Agregar", "Create")
+    <div class="sign text-center pricing-table-sign-up">
+        <a href="../../Empresas/Create" class="btn btn-light btn-radius btn-brd grd1 effect-1">Agregar</a>
+    </div>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NombreEntidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NombreContactoEntidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EmailEmpresa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UrlLogo)
-        </th>
-        <th></th>
-    </tr>
+<div id="pricing-box" class="section wb">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NombreEntidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NombreContactoEntidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmailEmpresa)
-        </td>
-        <td>
-            @*@Html.DisplayFor(modelItem => item.UrlLogo)*@
-            <img width="80px" height="80px" src="@Html.DisplayFor(modelItem => item.UrlLogo)" />
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Detalles", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Borrar", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
 
-</table>
+    @foreach (var item in Model)
+    {
+        if (@ViewBag.id == null)
+        {
+            ViewBag.id = 0;
+        }
+
+        if (ViewBag.id == 0)
+        {
+            @:<div class='container'>
+            }
+
+            <div class='col-md-4 col-sm-6 col-xs-12'>
+                <div class="grid1">
+                    <span>@Html.DisplayFor(modelItem => item.NombreEntidad)</span>
+                    <div class="price-tit text-center">
+                        <h2>@Html.DisplayFor(modelItem => item.NombreContactoEntidad)</h2>
+                        <p><img src="@item.UrlLogo" width="80" height="80" /> </p>
+                    </div>
+                    <div class="para">
+                        <!--<p>1 Anexo</p>
+                        <p>10 Gripos</p>
+                        <p>50 Preguntas</p>-->
+                        
+                    </div>
+                    <div class="sign text-center pricing-table-sign-up">
+                        <a href="../../auditorias/index?idEmpresa=@item.Id" class="btn btn-light btn-radius btn-brd grd1 effect-1">Gestionar</a>
+                    </div>
+                </div>
+            </div>
+
+            if (ViewBag.id == 2)
+            {
+                @:<div class='clear'> </div>
+                @:</div>
+                ViewBag.id = 0;
+        }
+        else
+        {
+            ViewBag.id = ViewBag.id + 1;
+        }
+
+
+
+    }
+
+</div>
+

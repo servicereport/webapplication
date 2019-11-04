@@ -21,5 +21,7 @@ namespace serviceReport.Models.Auditoria
         public string EmailEmpresa { get; set; }
 
         public string UrlLogo { get; set; }
+
+        public ICollection<Auditoria> Auditorias { get; set; }
     }
 }

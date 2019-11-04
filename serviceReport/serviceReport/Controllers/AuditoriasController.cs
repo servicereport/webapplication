@@ -16,10 +16,18 @@ namespace serviceReport.Areas.Auditoria.Controllers
         private AuditoriaContext db = new AuditoriaContext();
 
         // GET: Auditoria/Auditorias
-        public ActionResult Index()
+        public ActionResult Index(int idEmpresa)
         {
-            var auditorias = db.Auditorias.Include(a => a.Auditor).Include(a => a.EmpresaAuditoria).Include(a => a.Estado);
-            return View(auditorias.ToList());
+            var empresa = db.Empresas.Where(e => e.Id == idEmpresa).FirstOrDefault();
+            empresa.Auditorias = db.Auditorias.Where(a => a.IdEmpresa == idEmpresa).ToList();
+            
+            foreach (var item in empresa.Auditorias)
+            {
+                item.Auditor = db.Usuarios.Where(a => a.Id == item.IdAuditor).FirstOrDefault();
+                item.Estado = db.Estados.Where(a => a.Id==item.IdEstadoAuditoria).FirstOrDefault();
+            }
+
+            return View(empresa);
         }
 
         // GET: Auditoria/Auditorias/Details/5
