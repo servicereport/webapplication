@@ -17,10 +17,25 @@ namespace serviceReport.Areas.ISO.Controllers
         private AuditoriaContext db = new AuditoriaContext();
 
         // GET: ISO/Anexos
-        public ActionResult Index(int idDominio)
+        public ActionResult Index(int? idDominio)
         {
+            if (idDominio == null)
+            {
+                if(Session["idDominio"] != null)
+                    idDominio = Convert.ToInt32(Session["idDominio"]);
+                else
+                    return RedirectToAction("Index", "Dominios");
+            }                
+            else
+                Session["idDominio"] = idDominio;
+
             var dominio = db.Dominios.Where(d => d.Id == idDominio).Include(d=> d.Anexos).FirstOrDefault();
             
+            if (dominio.Anexos.Any())
+                ViewBag.IdAnexo = dominio.Anexos.First().Id;
+            else
+                ViewBag.IdAnexo = 0; 
+
             foreach (var anexo in dominio.Anexos)
             {
                 anexo.Grupos = db.Grupos.Where(g => g.IdAnexo == anexo.Id).ToList();

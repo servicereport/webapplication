@@ -57,7 +57,7 @@ namespace serviceReport.Areas.ISO.Controllers
             {
                 db.Grupos.Add(grupo);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Anexos");
             }
 
             ViewBag.IdAnexo = new SelectList(db.Anexos, "Id", "Titulo", grupo.IdAnexo);
@@ -93,7 +93,7 @@ namespace serviceReport.Areas.ISO.Controllers
             {
                 db.Entry(grupo).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Anexos");
             }
             ViewBag.IdAnexo = new SelectList(db.Anexos, "Id", "Titulo", grupo.IdAnexo);
             ViewBag.IdDominio = new SelectList(db.Dominios, "Id", "NombreDominio", grupo.IdDominio);
