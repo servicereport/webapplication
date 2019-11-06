@@ -84,9 +84,30 @@
                             @:<li>
                                 @:<a href='#tab_@auditoria.Id' data-toggle="pill" onclick="SetAnexo(@auditoria.Id)">@Html.DisplayFor(model => auditoria.FechaAuditoria) @Html.DisplayFor(model => auditoria.Estado.Estado)</a>
                                 @:<p>
-                                    @:<a href="../../Anexos/Edit?id=@auditoria.Id"><img src="../../content/images/application-edit-icon.png" />editar</a>
-                                    @:</i>
-                                    @:</p>
+
+    switch (auditoria.IdEstadoAuditoria)
+    {
+        case 1:
+            @:<a><img src="../../content/images/edit.png" />Editar</a></br>
+            @:<a><img src="../../content/images/document-disabled.png" />gestionar</a></br>
+            @:<a href="../../Anexos/Edit?id=@auditoria.Id"><img src="../../content/images/report-disabled.png" />Consultar</a>
+            break;
+        case 2:
+        case 3:
+            @:<a><img src="../../content/images/edit-disabled.png" />Editar</a></br>
+            @:<a href="../../Anexos/Edit?id=@auditoria.Id"><img src="../../content/images/document.png" />gestionar</a></br>
+            @:<a><img src="../../content/images/report-disabled.png" />Consultar</a>
+            break;
+        case 4:
+            @:<a><img src="../../content/images/edit-disabled.png" />Editar</a></br>
+            @:<a><img src="../../content/images/document-disabled.png" />Gestionar</a></br>
+            @:<a href="../../Reportes/index?id=@auditoria.Id"><img src="../../content/images/report.png" />Consultar</a>
+            break;
+
+    }
+
+    @:</i>
+    @:</p>
                                 @:</li>
             }
                     </ul>
