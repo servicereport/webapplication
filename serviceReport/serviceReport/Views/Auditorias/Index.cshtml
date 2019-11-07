@@ -78,45 +78,86 @@
                 <div class="message-box">
                     <ul class="nav nav-pills nav-stacked" id="myTabs">
                         @foreach (var auditoria in Model.Auditorias)
-                        {
+                    {
 
-                            @*<li class="active"><a href="#tab1" data-toggle="pill">@Html.DisplayFor(model => model.Identificador).@Html.DisplayFor(model => model.Consecutivo).@anexo.Consecutivo @anexo.Titulo</a></li>*@
-                            @:<li>
-                                @:<a href='#tab_@auditoria.Id' data-toggle="pill" onclick="SetAnexo(@auditoria.Id)">@Html.DisplayFor(model => auditoria.FechaAuditoria) @Html.DisplayFor(model => auditoria.Estado.Estado)</a>
-                                @:<p>
+                        @*<li class="active"><a href="#tab1" data-toggle="pill">@Html.DisplayFor(model => model.Identificador).@Html.DisplayFor(model => model.Consecutivo).@anexo.Consecutivo @anexo.Titulo</a></li>*@
+                        @:                        <li>
+                            @:<a href='#tab_@auditoria.Id' data-toggle="pill" onclick="SetAnexo(@auditoria.Id)">@Html.DisplayFor(model => auditoria.FechaAuditoria) @Html.DisplayFor(model => auditoria.Estado.Estado)</a>
+                            @:<p>
 
-    switch (auditoria.IdEstadoAuditoria)
-    {
-        case 1:
-            @:<a><img src="../../content/images/edit.png" />Editar</a></br>
-            @:<a><img src="../../content/images/document-disabled.png" />gestionar</a></br>
-            @:<a href="../../Anexos/Edit?id=@auditoria.Id"><img src="../../content/images/report-disabled.png" />Consultar</a>
-            break;
-        case 2:
-        case 3:
-            @:<a><img src="../../content/images/edit-disabled.png" />Editar</a></br>
-            @:<a href="../../Anexos/Edit?id=@auditoria.Id"><img src="../../content/images/document.png" />gestionar</a></br>
-            @:<a><img src="../../content/images/report-disabled.png" />Consultar</a>
-            break;
-        case 4:
-            @:<a><img src="../../content/images/edit-disabled.png" />Editar</a></br>
-            @:<a><img src="../../content/images/document-disabled.png" />Gestionar</a></br>
-            @:<a href="../../Reportes/index?id=@auditoria.Id"><img src="../../content/images/report.png" />Consultar</a>
-            break;
 
-    }
+                            switch (auditoria.IdEstadoAuditoria)
+                            {
+                                case 1:
+                                    @:<a href="../../Auditorias/Edit?id=@auditoria.Id"><img src="../../content/images/edit.png" />Editar</a><br />
+                                    <label class="disabled"><img src="../../content/images/document-disabled.png" />Gestionar</label><br />
+                                    <label class="disabled"><img src="../../content/images/report-disabled.png" />Consultar</label><br />
+                                break;
+                            case 2:
+                            case 3:
+                                @:<a><img src="../../content/images/edit-disabled.png" />Editar</a><br />
+                                @:<a href="../../Auditorias/Edit?id=@auditoria.Id"><img src="../../content/images/document.png" />gestionar</a><br />
+                                @:<a><img src="../../content/images/report-disabled.png" />Consultar</a>
+                            break;
+                        case 4:
+                            @:<a><img src="../../content/images/edit-disabled.png" />Editar</a><br />
+                            @:<a><img src="../../content/images/document-disabled.png" />Gestionar</a><br />
+                            @:<a href="../../Reportes/index?id=@auditoria.Id"><img src="../../content/images/report.png" />Consultar</a>
+                        break;
 
-    @:</i>
-    @:</p>
-                                @:</li>
-            }
+                }
+
+                @:</i>
+                @:            </p>
+            @:        </li>
+}
                     </ul>
                 </div>
             </div>
         </div>
         <hr class="invis">
 
-
+        <div id="overviews" class="section wb">
+            <div class="container">
+                <div class="section-title row text-center">
+                    <div class="col-md-12">
+                        <h3>Dominios disponibles</h3>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="list-domain">
+                            <div class="col-md-6">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                                <span>POLÍTICA DE SEGURIDAD</span>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                                <span>GESTIÓN DE ACTIVOS</span>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                                <span>POLÍTICA DE SEGURIDAD</span>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                                <span>CONTROL DE ACCESO</span>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end title -->
+            </div><!-- end container -->
+        </div><!-- end section -->
         @*<div class="row">
             <div class="col-md-12">
                 <div class="tab-content">

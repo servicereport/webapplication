@@ -16,8 +16,18 @@ namespace serviceReport.Areas.Auditoria.Controllers
         private AuditoriaContext db = new AuditoriaContext();
 
         // GET: Auditoria/Auditorias
-        public ActionResult Index(int idEmpresa)
+        public ActionResult Index(int? idEmpresa)
         {
+            if (idEmpresa == null)
+            {
+                if (Session["idEmpresa"] != null)
+                    idEmpresa = Convert.ToInt32(Session["idEmpresa"]);
+                else
+                    return RedirectToAction("Index", "Empresas");
+            }
+            else
+                Session["idEmpresa"] = idEmpresa;
+
             var empresa = db.Empresas.Where(e => e.Id == idEmpresa).FirstOrDefault();
             empresa.Auditorias = db.Auditorias.Where(a => a.IdEmpresa == idEmpresa).ToList();
             
@@ -103,7 +113,7 @@ namespace serviceReport.Areas.Auditoria.Controllers
             {
                 db.Entry(auditoria).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Auditorias");
             }
             ViewBag.IdAuditor = new SelectList(db.Usuarios, "Id", "UserName", auditoria.IdAuditor);
             ViewBag.IdEmpresa = new SelectList(db.Empresas, "Id", "NombreEntidad", auditoria.IdEmpresa);
