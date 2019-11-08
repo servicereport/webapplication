@@ -30,11 +30,20 @@ namespace serviceReport.Areas.Auditoria.Controllers
 
             var empresa = db.Empresas.Where(e => e.Id == idEmpresa).FirstOrDefault();
             empresa.Auditorias = db.Auditorias.Where(a => a.IdEmpresa == idEmpresa).ToList();
+
+            var dominios = db.Dominios.Where(d=> d.Activo == true).ToList();
             
             foreach (var item in empresa.Auditorias)
             {
                 item.Auditor = db.Usuarios.Where(a => a.Id == item.IdAuditor).FirstOrDefault();
                 item.Estado = db.Estados.Where(a => a.Id==item.IdEstadoAuditoria).FirstOrDefault();
+                var dominiosActuales = db.DominiosAuditoria.Where(d => d.IdAuditoria == item.Id).ToList();
+
+                foreach (var dominio in dominios)
+                {
+                    dominio.Asociado = dominiosActuales.Where(d => d.IdDominio == dominio.Id).Any();
+                    item.Dominios..Add(dominio);
+                }
             }
 
             return View(empresa);

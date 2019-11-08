@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -20,7 +21,13 @@ namespace serviceReport.Models.ISO
         [Required]
         public int Consecutivo { get; set; }
 
+        public bool Activo { get; set; }
+
         public ICollection<Anexo> Anexos { get; set; }
+
+
+        [NotMapped]
+        public bool Asociado { get; set; }
 
     }
 }

@@ -35,5 +35,8 @@ namespace serviceReport.Models.Auditoria
 
         [Required]
         public int IdEstadoAuditoria { get; set; }
+
+        public ICollection<DominiosAuditoria> Dominios { get; set; }
+
     }
 }
