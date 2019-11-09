@@ -41,9 +41,18 @@ namespace serviceReport.Areas.Auditoria.Controllers
 
                 foreach (var dominio in dominios)
                 {
-                    dominio.Asociado = dominiosActuales.Where(d => d.IdDominio == dominio.Id).Any();
-                    item.Dominios..Add(dominio);
-                }
+                    var asociado = dominiosActuales.Where(d => d.IdDominio == dominio.Id).Any();
+                    if (!asociado)
+                    {
+                        if (item.Dominios == null)
+                            item.Dominios = new List<DominiosAuditoria>();
+                        item.Dominios.Add(new DominiosAuditoria() { IdDominio = dominio.Id, Dominio = dominio, Asociado = asociado });
+                    }
+                        
+                    else
+                        item.Dominios.Where(d => d.Id == dominio.Id).First().Asociado = true;
+                    //item.Id = dominio.Id;
+                }                
             }
 
             return View(empresa);
@@ -65,11 +74,10 @@ namespace serviceReport.Areas.Auditoria.Controllers
         }
 
         // GET: Auditoria/Auditorias/Create
-        public ActionResult Create()
+        public ActionResult Create(int? idEmpresa)
         {
             ViewBag.IdAuditor = new SelectList(db.Usuarios, "Id", "UserName");
-            ViewBag.IdEmpresa = new SelectList(db.Empresas, "Id", "NombreEntidad");
-            ViewBag.IdEstadoAuditoria = new SelectList(db.Estados, "Id", "Estado");
+            ViewBag.IdEmpresa = new SelectList(db.Empresas, "Id", "NombreEntidad", idEmpresa);
             return View();
         }
 
@@ -78,10 +86,12 @@ namespace serviceReport.Areas.Auditoria.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,IdEmpresa,IdAuditor,FechaCreacion,FechaAuditoria,IdEstadoAuditoria")] Models.Auditoria.Auditoria auditoria)
+        public ActionResult Create([Bind(Include = "Id,IdEmpresa,IdAuditor,FechaAuditoria")] Models.Auditoria.Auditoria auditoria)
         {
             if (ModelState.IsValid)
             {
+                auditoria.FechaCreacion = DateTime.Now;
+                auditoria.IdEstadoAuditoria = 1;
                 db.Auditorias.Add(auditoria);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -89,7 +99,6 @@ namespace serviceReport.Areas.Auditoria.Controllers
 
             ViewBag.IdAuditor = new SelectList(db.Usuarios, "Id", "UserName", auditoria.IdAuditor);
             ViewBag.IdEmpresa = new SelectList(db.Empresas, "Id", "NombreEntidad", auditoria.IdEmpresa);
-            ViewBag.IdEstadoAuditoria = new SelectList(db.Estados, "Id", "Estado", auditoria.IdEstadoAuditoria);
             return View(auditoria);
         }
 
@@ -128,6 +137,11 @@ namespace serviceReport.Areas.Auditoria.Controllers
             ViewBag.IdEmpresa = new SelectList(db.Empresas, "Id", "NombreEntidad", auditoria.IdEmpresa);
             ViewBag.IdEstadoAuditoria = new SelectList(db.Estados, "Id", "Estado", auditoria.IdEstadoAuditoria);
             return View(auditoria);
+        }
+
+        public ActionResult Asociar(int idEmpresa, int idAuditoria, int idDominio, bool activo)
+        {
+            return null;
         }
 
         // GET: Auditoria/Auditorias/Delete/5

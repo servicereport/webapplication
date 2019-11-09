@@ -14,59 +14,6 @@
     </div>
 </div>
 
-
-
-@*
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Auditor.UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EmpresaAuditoria.NombreEntidad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado.Estado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaCreacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaAuditoria)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Auditor.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EmpresaAuditoria.NombreEntidad)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Estado.Estado)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaCreacion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaAuditoria)
-                </td>
-                <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
-                </td>
-            </tr>
-        }
-
-    </table>
-*@
-
-
 <div id="pricing" class="section lb">
     <div class="container">
         <div class="section-title text-center">
@@ -81,10 +28,9 @@
                     {
 
                         @*<li class="active"><a href="#tab1" data-toggle="pill">@Html.DisplayFor(model => model.Identificador).@Html.DisplayFor(model => model.Consecutivo).@anexo.Consecutivo @anexo.Titulo</a></li>*@
-                        @:                        <li>
+                        @:<li>
                             @:<a href='#tab_@auditoria.Id' data-toggle="pill" onclick="SetAnexo(@auditoria.Id)">@Html.DisplayFor(model => auditoria.FechaAuditoria) @Html.DisplayFor(model => auditoria.Estado.Estado)</a>
                             @:<p>
-
 
                             switch (auditoria.IdEstadoAuditoria)
                             {
@@ -108,8 +54,8 @@
                 }
 
                 @:</i>
-                @:            </p>
-            @:        </li>
+                @:</p>
+            @:</li>
 }
                     </ul>
                 </div>
@@ -117,119 +63,54 @@
         </div>
         <hr class="invis">
 
-        <div id="overviews" class="section wb">
-            <div class="container">
-                <div class="section-title row text-center">
-                    <div class="col-md-12">
-                        <h3>Dominios disponibles</h3>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="list-domain">
-                            <div class="col-md-6">
-                                <label class="switch">
-                                    <input type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                                <span>POLÍTICA DE SEGURIDAD</span>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="switch">
-                                    <input type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                                <span>GESTIÓN DE ACTIVOS</span>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="switch">
-                                    <input type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                                <span>POLÍTICA DE SEGURIDAD</span>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="switch">
-                                    <input type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                                <span>CONTROL DE ACCESO</span>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- end title -->
-            </div><!-- end container -->
-        </div><!-- end section -->
-        @*<div class="row">
+        <div class="row">
             <div class="col-md-12">
                 <div class="tab-content">
 
-                    <!--inicio del grupo-->
-                    @foreach (var anexo in Model.Anexos)
-                    {
-                        @:<div class="tab-pane active fade in" id="tab_@anexo.Id">
-                            @:<div class="row text-center">
+                    @foreach (var auditoria in Model.Auditorias)
+                {
+                    @:<div class="tab-pane active fade in" id="tab_@auditoria.Id">
+                        @:<div class="row text-center">
 
-
-
-                                foreach (var grupo in @anexo.Grupos)
-                                {
-                                    @:<div class="col-md-6">
-                                        @:<div class="pricing-table pricing-table-highlighted">
-                                            @:<div class="pricing-table-header grd1">
-                                                @:<h2>A.5.1.1 @grupo.NombreGrupo</h2>
-                                                @:<h3>@grupo.Preguntas.Count Preguntas</h3>
-                                                @:<p>
-                                                    <a href="~/Grupos/Edit?id=@grupo.Id"><img src="~/content/images/application-edit-icon.png" />editar</a>
-                                                    @:</i>
-                                                    @:
-                                                </p>
-                                                @:
-                                            </div>
-                                            @:<div class="pricing-table-space"></div>
-                                            @:<div class="pricing-table-features">
-
-
-
-
-
-
-
-
-                                                foreach (var pregunta in grupo.Preguntas)
-                                                {
-                                                    @:<p><a href="~/Preguntas/Edit?idPregunta=@pregunta.Id"><img src="../../content/images/application-edit-icon.png" /></a> <strong>@pregunta.Descripcion </strong></p>
-                                                }
-                                                @:
-                                            </div>
-                                            @:<div class="pricing-table-sign-up">
-                                                @:<a href="../../Preguntas/Create?idGrupo=@grupo.Id" data-scroll class="btn btn-light btn-radius btn-brd grd1 effect-1">Agregar Pregunta</a>
-                                                @:
-                                            </div>
-                                            @:
-                                        </div>
-                                        @:
-                                    </div>
-                                }
-                                @:
+                        foreach (var dominio in auditoria.Dominios)
+                        {
+                            <div class="col-md-6">
+                                <label class="switch">
+                                    <input type="checkbox" @if (dominio.Asociado) { @Html.Raw("checked='checked'") }. onclick="guardarAuditoria(@dominio.IdDominio)" >
+                                    <span class="slider round"></span>
+                                </label>
+                                <span>@dominio.Dominio.NombreCompleto</span>
                             </div>
-                            @:
-                        </div>
-        }
-                    <!--fin del grupo-->
-                </div><!-- end content -->
-            </div><!-- end col -->
-        </div><!-- end row -->*@
+                    }
+
+                    @:</div>
+                @:</div>
+    }
 
 
+
+
+                </div>
+            </div>
+        </div><!-- end title -->
+    
         <div class="btn-group addGruoup">
             <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Agregar
             </button>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="~/Dominios/Create">Dominio</a><br>
-                <a class="dropdown-item" href="~/Anexos/Create?idDominio=@Model.Id">Anexo</a><br>
-                <a class="dropdown-item" id="btnAdd" href="~/Grupos/Create?idDominio=@Model.Id&idAnexo=">Grupo</a>
+                <a class="dropdown-item" href="~/Empresas/Create">Empresa</a><br>
+                <a class="dropdown-item" href="~/Auditorias/Create?idEmpresa=@Model.Id">Auditoria</a><br>
             </div>
         </div>
 
     </div><!-- end container -->
 </div><!-- end section -->
+
+<script>
+    function guardarAuditoria(idAuditoria, idDominio) {
+        var idEmpresa = @Model.Id;
+        alert(@Model.Id);
+    }
+
+</script>

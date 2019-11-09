@@ -24,5 +24,9 @@ namespace serviceReport.Models.Auditoria
 
         [Required]
         public int IdAuditoria { get; set; }
+
+
+        [NotMapped]
+        public bool Asociado { get; set; }
     }
 }

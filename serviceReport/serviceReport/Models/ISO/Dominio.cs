@@ -25,9 +25,10 @@ namespace serviceReport.Models.ISO
 
         public ICollection<Anexo> Anexos { get; set; }
 
-
         [NotMapped]
-        public bool Asociado { get; set; }
+        public string NombreCompleto { get { return $"{Identificador}.{Consecutivo} {NombreDominio}"; } }
+
+
 
     }
 }

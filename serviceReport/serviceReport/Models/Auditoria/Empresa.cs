@@ -22,6 +22,6 @@ namespace serviceReport.Models.Auditoria
 
         public string UrlLogo { get; set; }
 
-        public ICollection<Auditoria> Auditorias { get; set; }
+        public List<Auditoria> Auditorias { get; set; }
     }
 }
