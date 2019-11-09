@@ -50,7 +50,7 @@ namespace serviceReport.Areas.Auditoria.Controllers
                     }
                         
                     else
-                        item.Dominios.Where(d => d.Id == dominio.Id).First().Asociado = true;
+                        item.Dominios.Where(d => d.IdDominio == dominio.Id).First().Asociado = true;
                     //item.Id = dominio.Id;
                 }                
             }
@@ -139,9 +139,26 @@ namespace serviceReport.Areas.Auditoria.Controllers
             return View(auditoria);
         }
 
-        public ActionResult Asociar(int idEmpresa, int idAuditoria, int idDominio, bool activo)
+        [HttpGet]
+        public bool Asociar(int idAuditoria, int idDominio)
         {
-            return null;
+            var current = db.DominiosAuditoria.Where(ad => ad.IdAuditoria == idAuditoria && ad.IdDominio == idDominio).ToList();
+            if(current.Any())
+            {
+                var auditoria = db.DominiosAuditoria.Find(current.First().Id);
+                db.DominiosAuditoria.Remove(auditoria);
+                db.SaveChanges();
+            }
+            else
+            {
+                db.DominiosAuditoria.Add(new DominiosAuditoria()
+                {
+                    IdAuditoria = idAuditoria,
+                    IdDominio = idDominio
+                });
+                db.SaveChanges();
+            }
+            return true;
         }
 
         // GET: Auditoria/Auditorias/Delete/5

@@ -76,7 +76,8 @@
                         {
                             <div class="col-md-6">
                                 <label class="switch">
-                                    <input type="checkbox" @if (dominio.Asociado) { @Html.Raw("checked='checked'") }. onclick="guardarAuditoria(@dominio.IdDominio)" >
+                                    <input type="checkbox" @if (dominio.Asociado) { @Html.Raw("checked='checked'") }. 
+                                           onclick="guardarAuditoria(@auditoria.Id, @dominio.IdDominio)" >
                                     <span class="slider round"></span>
                                 </label>
                                 <span>@dominio.Dominio.NombreCompleto</span>
@@ -109,8 +110,16 @@
 
 <script>
     function guardarAuditoria(idAuditoria, idDominio) {
-        var idEmpresa = @Model.Id;
-        alert(@Model.Id);
+        $.ajax({
+            type: "GET",
+            url: "Asociar?idAuditoria=" + idAuditoria + "&idDominio=" + idDominio,
+            //data: data,
+            success: function () {
+                alert("success")
+            }
+        });
     }
+
+
 
 </script>
