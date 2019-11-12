@@ -1,0 +1,72 @@
+﻿@model serviceReport.Models.Auditoria.Auditoria
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="all-title-box">
+    <div class="container text-center">
+        <h1><img src="@Model.EmpresaAuditoria.UrlLogo" width="60px;" style="border-top:1000px" height="60px" alt="...">
+        @Html.DisplayFor(model => Model.EmpresaAuditoria.NombreEntidad)
+        <span class="m_1">@Html.DisplayFor(model => Model.EmpresaAuditoria.NombreContactoEntidad) - @Html.DisplayFor(model => Model.EmpresaAuditoria.EmailEmpresa)</span>
+        </h1>
+    </div>
+</div>
+
+<div id="pricing" class="section lb">
+    <div class="container">
+        <div class="section-title text-center">
+            <h3>Auditoria programada para @Model.FechaAuditoria.ToLongDateString()</h3>
+            <!-- <p class="lead">Get the red carpet treatment <strong>just $39 per month!</strong> It is estimated that 3.5 million established by personal blogs.<br> From each other, we share paid WordPress themes WP Service...</p> -->
+        </div><!-- end title -->
+
+        <hr class="invis">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tab-content">
+
+                    @foreach (var dominio in Model.Dominios)
+                {
+                    <div class="col-md-6">
+                        <label class="switch">
+                            <input type="checkbox" @if (dominio.Asociado) { @Html.Raw("checked='checked'") } .
+                                   onclick="guardarAuditoria(@Model.Id, @dominio.IdDominio)">
+                            <span class="slider round"></span>
+                        </label>
+                        <span>@dominio.Dominio.NombreCompleto</span>
+                    </div>
+            }
+
+                </div>
+            </div>
+        </div><!-- end title -->
+
+        <div class="sign text-center pricing-table-sign-up">
+            <a href="../../auditorias/confirmar?idAuditoria=@Model.Id" class="btn btn-light btn-radius btn-brd grd1 effect-1"
+               onclick="return confirm('Al confirmar la configuración actual no podrá cambiarla.  ¿Desea continuar con la confirmación?');">Confirmar</a>
+        </div>
+
+        <div>
+            @Html.ActionLink("Volver", "Lista")
+        </div>
+
+
+    </div><!-- end container -->
+</div><!-- end section -->
+
+<script>
+    function guardarAuditoria(idAuditoria, idDominio) {
+        $.ajax({
+            type: "GET",
+            url: "Asociar?idAuditoria=" + idAuditoria + "&idDominio=" + idDominio,
+            //data: data,
+            success: function () {
+                console.log("success")
+            }
+        });
+    }
+
+
+</script>

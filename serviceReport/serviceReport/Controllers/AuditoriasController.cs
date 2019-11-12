@@ -15,6 +15,64 @@ namespace serviceReport.Areas.Auditoria.Controllers
     {
         private AuditoriaContext db = new AuditoriaContext();
 
+        public ActionResult Lista(int? idEmpresa)
+        {
+            if (idEmpresa == null)
+            {
+                if (Session["idEmpresa"] != null)
+                    idEmpresa = Convert.ToInt32(Session["idEmpresa"]);
+                else
+                    return RedirectToAction("Index", "Empresas");
+            }
+            else
+                Session["idEmpresa"] = idEmpresa;
+            var auditorias = db.Auditorias.Where(a => a.IdEmpresa == idEmpresa).ToList();
+            foreach (var item in auditorias)
+            {
+                item.Auditor = db.Usuarios.Where(a => a.Id == item.IdAuditor).FirstOrDefault();
+                item.Estado = db.Estados.Where(a => a.Id == item.IdEstadoAuditoria).FirstOrDefault();
+                item.EmpresaAuditoria = db.Empresas.Find(idEmpresa);
+            }
+            return View(auditorias);
+        }
+
+        public ActionResult Configurar(int? idAuditoria)
+        {
+            var auditoria = db.Auditorias.Where(a => a.Id == idAuditoria).First();
+            var dominios = db.Dominios.Where(d => d.Activo == true).ToList();
+
+            auditoria.Auditor = db.Usuarios.Where(a => a.Id == auditoria.IdAuditor).FirstOrDefault();
+            auditoria.Estado = db.Estados.Where(a => a.Id == auditoria.IdEstadoAuditoria).FirstOrDefault();
+            auditoria.EmpresaAuditoria = db.Empresas.Where(a => a.Id == auditoria.IdEmpresa).FirstOrDefault();
+            var dominiosActuales = db.DominiosAuditoria.Where(d => d.IdAuditoria == auditoria.Id).ToList();
+
+            foreach (var dominio in dominios)
+            {
+                var asociado = dominiosActuales.Where(d => d.IdDominio == dominio.Id).Any();
+                if (!asociado)
+                {
+                    if (auditoria.Dominios == null)
+                        auditoria.Dominios = new List<DominiosAuditoria>();
+                    auditoria.Dominios.Add(new DominiosAuditoria() { IdDominio = dominio.Id, Dominio = dominio, Asociado = asociado });
+                }
+
+                else
+                    auditoria.Dominios.Where(d => d.IdDominio == dominio.Id).First().Asociado = true;
+                //item.Id = dominio.Id;
+            }
+
+            return View(auditoria);
+        }
+
+        public ActionResult Confirmar(int idAuditoria)
+        {
+            var auditoria = db.Auditorias.Where(a => a.Id == idAuditoria).First();
+            auditoria.IdEstadoAuditoria = 2;
+            db.Entry(auditoria).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Lista", "Auditorias");
+        }
+
         // GET: Auditoria/Auditorias
         public ActionResult Index(int? idEmpresa)
         {
@@ -31,12 +89,12 @@ namespace serviceReport.Areas.Auditoria.Controllers
             var empresa = db.Empresas.Where(e => e.Id == idEmpresa).FirstOrDefault();
             empresa.Auditorias = db.Auditorias.Where(a => a.IdEmpresa == idEmpresa).ToList();
 
-            var dominios = db.Dominios.Where(d=> d.Activo == true).ToList();
-            
+            var dominios = db.Dominios.Where(d => d.Activo == true).ToList();
+
             foreach (var item in empresa.Auditorias)
             {
                 item.Auditor = db.Usuarios.Where(a => a.Id == item.IdAuditor).FirstOrDefault();
-                item.Estado = db.Estados.Where(a => a.Id==item.IdEstadoAuditoria).FirstOrDefault();
+                item.Estado = db.Estados.Where(a => a.Id == item.IdEstadoAuditoria).FirstOrDefault();
                 var dominiosActuales = db.DominiosAuditoria.Where(d => d.IdAuditoria == item.Id).ToList();
 
                 foreach (var dominio in dominios)
@@ -48,11 +106,11 @@ namespace serviceReport.Areas.Auditoria.Controllers
                             item.Dominios = new List<DominiosAuditoria>();
                         item.Dominios.Add(new DominiosAuditoria() { IdDominio = dominio.Id, Dominio = dominio, Asociado = asociado });
                     }
-                        
+
                     else
                         item.Dominios.Where(d => d.IdDominio == dominio.Id).First().Asociado = true;
                     //item.Id = dominio.Id;
-                }                
+                }
             }
 
             return View(empresa);
@@ -143,7 +201,7 @@ namespace serviceReport.Areas.Auditoria.Controllers
         public bool Asociar(int idAuditoria, int idDominio)
         {
             var current = db.DominiosAuditoria.Where(ad => ad.IdAuditoria == idAuditoria && ad.IdDominio == idDominio).ToList();
-            if(current.Any())
+            if (current.Any())
             {
                 var auditoria = db.DominiosAuditoria.Find(current.First().Id);
                 db.DominiosAuditoria.Remove(auditoria);

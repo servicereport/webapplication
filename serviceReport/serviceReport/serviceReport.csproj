@@ -948,6 +948,8 @@
     <Content Include="Views\Reportes\Details.cshtml" />
     <Content Include="Views\Reportes\Edit.cshtml" />
     <Content Include="Views\Reportes\Index.cshtml" />
+    <Content Include="Views\Auditorias\Lista.cshtml" />
+    <Content Include="Views\Auditorias\Configurar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
