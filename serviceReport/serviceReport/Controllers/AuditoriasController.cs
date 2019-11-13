@@ -183,17 +183,39 @@ namespace serviceReport.Areas.Auditoria.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,IdEmpresa,IdAuditor,FechaCreacion,FechaAuditoria,IdEstadoAuditoria")] Models.Auditoria.Auditoria auditoria)
+        public ActionResult Edit([Bind(Include = "Id,IdAuditor,FechaAuditoria,FechaCreacion,IdEstadoAuditoria,IdEmpresa")] Models.Auditoria.Auditoria auditoria)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(auditoria).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index", "Auditorias");
+                return RedirectToAction("Lista", "Auditorias");
             }
             ViewBag.IdAuditor = new SelectList(db.Usuarios, "Id", "UserName", auditoria.IdAuditor);
             ViewBag.IdEmpresa = new SelectList(db.Empresas, "Id", "NombreEntidad", auditoria.IdEmpresa);
             ViewBag.IdEstadoAuditoria = new SelectList(db.Estados, "Id", "Estado", auditoria.IdEstadoAuditoria);
+            return View(auditoria);
+        }
+
+        public ActionResult Gestionar(int idAuditoria)
+        {
+            ViewBag.Respuestas = db.NivelesCalificacion.ToList();
+            var auditoria = db.Auditorias.Find(idAuditoria);
+            auditoria.Dominios = db.DominiosAuditoria.Where(d => d.IdAuditoria == idAuditoria).ToList();
+
+            for (int i = 0; i < auditoria.Dominios.Count; i++)
+            {
+                int idDominio = auditoria.Dominios[i].IdDominio;
+                auditoria.Dominios[i].Dominio = db.Dominios.Find(idDominio);
+
+                auditoria.Dominios[i].Preguntas = (from p in db.Preguntas
+                                 join g in db.Grupos on p.IdGrupo equals g.Id
+                                 join a in db.Anexos on g.IdAnexo equals a.Id
+                                 join d in db.Dominios on a.IdDominio equals d.Id
+                                 where d.Id == idDominio
+                                 select p).ToList();
+            }
+            auditoria.Dominios = auditoria.Dominios.OrderBy(d => d.Dominio.Identificador).ThenBy(d=> d.Dominio.Consecutivo).ToList();
             return View(auditoria);
         }
 

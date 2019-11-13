@@ -28,5 +28,8 @@ namespace serviceReport.Models.Auditoria
 
         [NotMapped]
         public bool Asociado { get; set; }
+
+        [NotMapped]
+        public List<Pregunta> Preguntas { get; set; }
     }
 }

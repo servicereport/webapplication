@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Lista de Auditorias</h2>
 
 <p>
     @Html.ActionLink("Agregar", "Create")
@@ -64,18 +64,18 @@
 break;
 case 2:
 case 3:
-            @:<label><img src="../../content/images/edit-disabled.png" />Editar</label><br />
+            @:<a href="../../Auditorias/Edit?id=@item.Id"><img src="../../content/images/edit.png" />Editar</a><br />
             <label class="disabled"><img src="../../content/images/config-disabled.png" />Configurar</label><br />
-            @:<a href="../../Auditorias/gestionar?idAuditoria=@item.Id"><img src="../../content/images/Gestionar.png" />Gestionar</a><br />
-            @:<a><img src="../../content/images/report-disabled.png" />Consultar</a><br />
+            <a href="../../Auditorias/gestionar?idAuditoria=@item.Id"><img src="../../content/images/Gestionar.png" />Gestionar</a><br />
+            <lable><img src="../../content/images/report-disabled.png" />Consultar</lable><br />
             <label class="disabled"><img src="../../content/images/delete-Disabled.png" />Borrar</label><br />
 break;
 case 4:
             @:<a><img src="../../content/images/edit-disabled.png" />Editar</a><br />
             <label class="disabled"><img src="../../content/images/config-disabled.png" />Configurar</label><br />
-            @:<a><img src="../../content/images/Gestionar-disabled.png" />Gestionar</a><br />
-            @:<a href="../../Reportes/index?id=@item.Id"><img src="../../content/images/report.png" />Consultar</a><br />
-            @:<label class="disabled"><img src="../../content/images/delete-Disabled.png" />Borrar</label><br />
+            <a><img src="../../content/images/Gestionar-disabled.png" />Gestionar</a><br />
+            <a href="../../Reportes/index?id=@item.Id"><img src="../../content/images/report.png" />Consultar</a><br />
+            <label class="disabled"><img src="../../content/images/delete-Disabled.png" />Borrar</label><br />
 break;
 
 }
