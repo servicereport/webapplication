@@ -146,6 +146,12 @@
     }
     function Confirmar() {
 
+        if (totalPendientes > 0) {
+            alert("Tiene " + totalPendientes + " registros por gestionar");
+            return false;
+        }
+            
+
         //Dewspues de guardar
         if (confirm("Guardar auditoria definitivamente?")) {
             window.location.href = "Lista?idAuditoria=" + idAuditoria;
