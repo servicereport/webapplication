@@ -233,7 +233,7 @@ namespace serviceReport.Areas.Auditoria.Controllers
 
             }
 
-            auditoria.Dominios = auditoria.Dominios.OrderBy(d => d.Dominio.Identificador).ThenBy(d=> d.Dominio.Consecutivo).ToList();
+            auditoria.Dominios = auditoria.Dominios.Where(d=> d.Preguntas.Count > 0).OrderBy(d => d.Dominio.Identificador).ThenBy(d=> d.Dominio.Consecutivo).ToList();
             return View(auditoria);
         }
 
@@ -281,6 +281,15 @@ namespace serviceReport.Areas.Auditoria.Controllers
                 });
                 db.SaveChanges();
             }
+            return true;
+        }
+
+        public bool Finalizar(int idAuditoria)
+        {
+            var auditoria = db.Auditorias.Where(a => a.Id == idAuditoria).First();
+            auditoria.IdEstadoAuditoria = 4;
+            db.Entry(auditoria).State = EntityState.Modified;
+            db.SaveChanges();
             return true;
         }
 

@@ -51,7 +51,7 @@
         }
 
         <div class="progress">
-            <div id="progress_@dominio.Id" class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"><br /></div>
+            <div id="progress_@dominio.Id" class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"><br /></div>
         </div>
 
     </div>
@@ -71,23 +71,21 @@
             console.log(alert_@dominio.Id);
             totalPendientes = totalPendientes - 1;
             actualizarResumen();
+            var porcentaje = (100 / @dominio.Preguntas.Count) * (@dominio.Preguntas.Count - alert_@dominio.Id);
+
             if (alert_@dominio.Id <= 0) {
                 document.getElementById("lbl_" + id).innerHTML = "Este dominio ya ha sido completado!";
                 document.getElementById("alert_" + id).classList.add('alert-success');
                 document.getElementById("alert_" + id).classList.remove('alert-warning');
-
-                //ProgressBar
-                @*var progress_@dominio.Id += 100/@dominio.Preguntas.Count;
-                document.getElementById("progress_" + id).setAttribute.remove("aria-valuenow");
-                document.getElementById("progress_" + id).setAttribute.add("aria-valuenow", );
-                console.log("%: " + progress_@dominio.Id);*@
-                //aria - valuenow="50"
-
             } else {
-                console.log("Dominio:" + id);
                 document.getElementById("lbl_" + id).innerHTML = "Tiene " + alert_@dominio.Id+ " preguntas pendientes por gestionar!";
             }
 
+            //ProgressBar
+            document.getElementById("progress_" + id).style.width = porcentaje + "%";
+            console.log(porcentaje + "%");
+            console.log("Dominio:" + id);
+            
         }
     </script>
 
@@ -146,11 +144,34 @@
         //window["validarDominio_" + idDominio]();
         
     }
+    function Confirmar() {
+
+        //Dewspues de guardar
+        if (confirm("Guardar auditoria definitivamente?")) {
+            window.location.href = "Lista?idAuditoria=" + idAuditoria;
+
+            var idAuditoria = @Model.Id;
+            $.ajax({
+                type: "GET",
+                url: "finalizar?idAuditoria=" + idAuditoria,
+                //data: data,
+                success: function () {
+
+                    window.location.href = "Lista?idAuditoria=" + idAuditoria;
+
+                }
+            });
+
+        } else {
+            return false;
+        }
+    }
+        
     </script>
 
 <div class="btn-group addGruoup">
-    
-    <input id="btn_confirmar" type="button" class="btn btn-warning dropdown-toggle" />
+
+    <input id="btn_confirmar" type="button" class="btn btn-warning dropdown-toggle" onclick="Confirmar();" />
     <script>actualizarResumen();</script>
     <div class="dropdown-menu">
     </div>
