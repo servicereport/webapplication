@@ -24,5 +24,11 @@ namespace serviceReport.Models.Auditoria
 
         [Required]
         public int IdCalificacion { get; set; }
+
+        [ForeignKey("IdAuditoria")]
+        public Auditoria Auditoria { get; set; }
+
+        [Required]
+        public int IdAuditoria { get; set; }
     }
 }

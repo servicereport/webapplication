@@ -20,5 +20,8 @@ namespace serviceReport.Models.ISO
         public int IdGrupo { get; set; }
 
         public bool Activo { get; set; }
+
+        [NotMapped]
+        public NivelCalificacion Respuesta { get; set; }
     }
 }

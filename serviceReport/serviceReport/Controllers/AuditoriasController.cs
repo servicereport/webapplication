@@ -200,6 +200,7 @@ namespace serviceReport.Areas.Auditoria.Controllers
         public ActionResult Gestionar(int idAuditoria)
         {
             ViewBag.Respuestas = db.NivelesCalificacion.ToList();
+            ViewBag.TotalPendientes = 0;
             var auditoria = db.Auditorias.Find(idAuditoria);
             auditoria.Dominios = db.DominiosAuditoria.Where(d => d.IdAuditoria == idAuditoria).ToList();
 
@@ -214,9 +215,51 @@ namespace serviceReport.Areas.Auditoria.Controllers
                                  join d in db.Dominios on a.IdDominio equals d.Id
                                  where d.Id == idDominio
                                  select p).ToList();
+
+                for (int j = 0; j < auditoria.Dominios[i].Preguntas.Count; j++)
+                {
+                    int idPregunta = auditoria.Dominios[i].Preguntas[j].Id;
+                    var respuesta = (from r in db.Respuestas
+                                     join c in db.NivelesCalificacion on r.IdCalificacion equals c.Id
+                                     where r.IdPregunta == idPregunta
+                                        && r.IdAuditoria == idAuditoria 
+                                     select c).FirstOrDefault();
+
+                    auditoria.Dominios[i].Preguntas[j].Respuesta = respuesta;
+
+                    if(respuesta == null)
+                        ViewBag.TotalPendientes++;
+                }
+
             }
+
             auditoria.Dominios = auditoria.Dominios.OrderBy(d => d.Dominio.Identificador).ThenBy(d=> d.Dominio.Consecutivo).ToList();
             return View(auditoria);
+        }
+
+        [HttpGet]
+        public bool Responder(int idAuditoria, int idPregunta, int idRespuesta)
+        {
+            var current = db.Respuestas.Where(ad => ad.IdAuditoria == idAuditoria && ad.IdPregunta == idPregunta).ToList();
+            if (current.Any())
+            {
+                var respuesta = db.Respuestas.Find(current.First().Id);
+                respuesta.IdCalificacion = idRespuesta;
+                db.Entry(respuesta).State = EntityState.Modified;
+                db.SaveChanges();
+                db.SaveChanges();
+            }
+            else
+            {
+                db.Respuestas.Add(new AuditoriaRespuestas()
+                {
+                    IdAuditoria = idAuditoria,
+                    IdPregunta = idPregunta,
+                    IdCalificacion = idRespuesta
+                });
+                db.SaveChanges();
+            }
+            return true;
         }
 
         [HttpGet]
