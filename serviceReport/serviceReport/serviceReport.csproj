@@ -18,7 +18,7 @@
     <AssemblyName>serviceReport</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -222,8 +222,21 @@
     <Content Include="Content\images\ajax-loader.gif" />
     <Content Include="Content\images\apple-touch-icon.png" />
     <Content Include="Content\images\application-edit-icon.png" />
+    <Content Include="Content\images\banner.jpg" />
     <Content Include="Content\images\bg.png" />
+    <Content Include="Content\images\Config-disabled.png" />
+    <Content Include="Content\images\Config.png" />
+    <Content Include="Content\images\delete-disabled.png" />
+    <Content Include="Content\images\delete.png" />
+    <Content Include="Content\images\document-disabled.png" />
+    <Content Include="Content\images\document.png" />
+    <Content Include="Content\images\editar-disabled.png" />
+    <Content Include="Content\images\editar.png" />
+    <Content Include="Content\images\edit-disabled.png" />
+    <Content Include="Content\images\edit.png" />
     <Content Include="Content\images\favicon.ico" />
+    <Content Include="Content\images\Gestionar-disabled.png" />
+    <Content Include="Content\images\Gestionar.png" />
     <Content Include="Content\images\logos\logo-hosting-light.png" />
     <Content Include="Content\images\logos\logo-hosting.png" />
     <Content Include="Content\images\phonebg.png" />
@@ -266,6 +279,8 @@
     <Content Include="Content\images\prettyPhoto\light_square\default_thumbnail.gif" />
     <Content Include="Content\images\prettyPhoto\light_square\loader.gif" />
     <Content Include="Content\images\prettyPhoto\light_square\sprite.png" />
+    <Content Include="Content\images\report-disabled.png" />
+    <Content Include="Content\images\report.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -986,7 +1001,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49946</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49946/</IISUrl>
+          <IISUrl>http://localhost/serviceReport</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

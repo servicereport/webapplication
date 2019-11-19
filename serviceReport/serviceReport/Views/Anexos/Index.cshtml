@@ -16,7 +16,7 @@
     var idAnexo = 0;
     function  SetAnexo(id){
         idAnexo = id;
-        document.getElementById("btnAdd").setAttribute("href", "../../Grupos/Create?idDominio=@Model.Id&idAnexo=" + id);        
+        document.getElementById("btnAdd").setAttribute("href", "~/Grupos/Create?idDominio=@Model.Id&idAnexo=" + id);        
     }
 
     function validarAnexo() {
@@ -47,7 +47,7 @@
                         @:<li>
                             @:<a href='#tab_@anexo.Id' data-toggle="pill" onclick="SetAnexo(@anexo.Id)">@Html.DisplayFor(model => model.Identificador).@Html.DisplayFor(model => model.Consecutivo).@anexo.Consecutivo @anexo.Titulo</a>
                             @:<p>
-                                @:<a href="../../Anexos/Edit?id=@anexo.Id"><img src="../../content/images/application-edit-icon.png" />editar</a>
+                                @:<a href="~/Anexos/Edit?id=@anexo.Id"><img src="~/content/images/application-edit-icon.png" />editar</a>
                                 @:</i>
                                 @:
                             @:</p>
@@ -94,18 +94,18 @@
     {
         if (pregunta.Activo)
         {
-            @:<p><a href="../../Preguntas/Edit?id=@pregunta.Id"><img src="../../content/images/application-edit-icon.png" /></a> <strong>@pregunta.Descripcion </strong></p>
+            @:<p><a href="~/Preguntas/Edit?id=@pregunta.Id"><img src="~/content/images/application-edit-icon.png" /></a> <strong>@pregunta.Descripcion </strong></p>
         }
         else
         {
-            @:<p><a href="../../Preguntas/Edit?id=@pregunta.Id"><img src="../../content/images/application-edit-icon.png" /></a> @pregunta.Descripcion</p>
+            @:<p><a href="~/Preguntas/Edit?id=@pregunta.Id"><img src="~/content/images/application-edit-icon.png" /></a> @pregunta.Descripcion</p>
         }
 
     }
     @:</div>
                             @:<div class="pricing-table-sign-up">
                            
-                                @:<a href="../../Preguntas/Create?idGrupo=@grupo.Id" data-scroll class="btn btn-light btn-radius btn-brd grd1 effect-1">Agregar Pregunta</a>
+                                @:<a href="~/Preguntas/Create?idGrupo=@grupo.Id" data-scroll class="btn btn-light btn-radius btn-brd grd1 effect-1">Agregar Pregunta</a>
                                 @:                            </div>
                             @:                        </div>
                         @:                    </div>

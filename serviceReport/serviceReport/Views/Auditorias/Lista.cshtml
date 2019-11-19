@@ -49,33 +49,30 @@
                 @Html.DisplayFor(modelItem => item.FechaAuditoria)
             </td>
             <td>
-                @*@Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-        @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
-        @Html.ActionLink("Borrar", "Delete", new { id = item.Id })*@
 
                 @switch (item.IdEstadoAuditoria)
     {
         case 1:
-            @:<a href="../../Auditorias/Edit?id=@item.Id"><img src="../../content/images/edit.png" />Editar</a><br />
-            <a href="../../Auditorias/Configurar?idAuditoria=@item.Id" class="disabled"><img src="../../content/images/config.png" />Configurar</a><br />
-            <label class="disabled"><img src="../../content/images/gestionar-disabled.png" />Gestionar</label><br />
-            <label class="disabled"><img src="../../content/images/report-disabled.png" />Consultar</label><br />
-            <a href="../../Auditorias/delete?id=@item.Id"><img src="../../content/images/delete.png" />Borrar</a><br />
+            @:<a href="~/Auditorias/Edit?id=@item.Id"><img src="@Url.Content("~/content/images/")edit.png" />Editar</a><br />
+            <a href="~/Auditorias/Configurar?idAuditoria=@item.Id" class="disabled"><img src="~/content/images/config.png" />Configurar</a><br />
+            <label class="disabled"><img src="~/content/images/gestionar-disabled.png" />Gestionar</label><br />
+            <label class="disabled"><img src="~/content/images/report-disabled.png" />Consultar</label><br />
+            <a href="~/Auditorias/delete?id=@item.Id"><img src="../../content/images/delete.png" />Borrar</a><br />
 break;
 case 2:
 case 3:
-            @:<a href="../../Auditorias/Edit?id=@item.Id"><img src="../../content/images/edit.png" />Editar</a><br />
-            <label class="disabled"><img src="../../content/images/config-disabled.png" />Configurar</label><br />
-            <a href="../../Auditorias/gestionar?idAuditoria=@item.Id"><img src="../../content/images/Gestionar.png" />Gestionar</a><br />
-            <lable><img src="../../content/images/report-disabled.png" />Consultar</lable><br />
-            <label class="disabled"><img src="../../content/images/delete-Disabled.png" />Borrar</label><br />
+            @:<a href="~/Auditorias/Edit?id=@item.Id"><img src="@Url.Content("~/content/images/")edit.png" />Editar</a><br />
+            <label class="disabled"><img src="~/content/images/config-disabled.png" />Configurar</label><br />
+            <a href="~/Auditorias/gestionar?idAuditoria=@item.Id"><img src="~/content/images/Gestionar.png" />Gestionar</a><br />
+            <label><img src="~/content/images/report-disabled.png" />Consultar</label><br />
+            <label class="disabled"><img src="~/content/images/delete-Disabled.png" />Borrar</label><br />
 break;
 case 4:
-            @:<a><img src="../../content/images/edit-disabled.png" />Editar</a><br />
-            <label class="disabled"><img src="../../content/images/config-disabled.png" />Configurar</label><br />
-            <a><img src="../../content/images/Gestionar-disabled.png" />Gestionar</a><br />
-            <a href="../../Reportes/index?id=@item.Id"><img src="../../content/images/report.png" />Consultar</a><br />
-            <label class="disabled"><img src="../../content/images/delete-Disabled.png" />Borrar</label><br />
+            @:<label><img src="@Url.Content("~/content/images/")edit-disabled.png" />Editar</label><br />
+            <label class="disabled"><img src="~/content/images/config-disabled.png" />Configurar</label><br />
+            <label class="disabled"><img src="~/content/images/Gestionar-disabled.png" />Gestionar</label><br />
+            <a href="~/Reportes/index?id=@item.Id"><img src="~/content/images/report.png" />Consultar</a><br />
+            <label class="disabled"><img src="~/content/images/delete-Disabled.png" />Borrar</label><br />
 break;
 
 }
