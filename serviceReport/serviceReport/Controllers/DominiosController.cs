@@ -22,6 +22,7 @@ namespace serviceReport.Areas.ISO.Controllers
             return View(db.Dominios.ToList());
         }
 
+
         // GET: ISO/Dominios/Details/5
         public ActionResult Details(int? id)
         {

@@ -134,6 +134,9 @@ namespace serviceReport.Areas.Auditoria.Controllers
         // GET: Auditoria/Auditorias/Create
         public ActionResult Create(int? idEmpresa)
         {
+            if(idEmpresa==null && Session["idEmpresa"] != null)
+                idEmpresa = Convert.ToInt32(Session["idEmpresa"]);
+
             ViewBag.IdAuditor = new SelectList(db.Usuarios, "Id", "UserName");
             ViewBag.IdEmpresa = new SelectList(db.Empresas, "Id", "NombreEntidad", idEmpresa);
             return View();
@@ -152,7 +155,7 @@ namespace serviceReport.Areas.Auditoria.Controllers
                 auditoria.IdEstadoAuditoria = 1;
                 db.Auditorias.Add(auditoria);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Lista");
             }
 
             ViewBag.IdAuditor = new SelectList(db.Usuarios, "Id", "UserName", auditoria.IdAuditor);

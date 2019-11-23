@@ -16,16 +16,19 @@
     var idAnexo = 0;
     function  SetAnexo(id){
         idAnexo = id;
-        document.getElementById("btnAdd").setAttribute("href", "~/Grupos/Create?idDominio=@Model.Id&idAnexo=" + id);        
+        document.getElementById("btnAdd").setAttribute("href", "@Url.Content("~/Grupos/Create?idDominio=")@Model.Id&idAnexo="+id);
+            console.log(id);
     }
 
     function validarAnexo() {
+        console.log(idAnexo);
         if (idAnexo === 0) {
-            alert("Seleccione un anexo: " + idAnexo);
+            alert("Seleccione un anexo ");
             return false;
         } else {
-            alert("anexo: " + idAnexo);
-        }        
+        }
+
+        
     }
 
 </script>
@@ -47,7 +50,7 @@
                         @:<li>
                             @:<a href='#tab_@anexo.Id' data-toggle="pill" onclick="SetAnexo(@anexo.Id)">@Html.DisplayFor(model => model.Identificador).@Html.DisplayFor(model => model.Consecutivo).@anexo.Consecutivo @anexo.Titulo</a>
                             @:<p>
-                                @:<a href="~/Anexos/Edit?id=@anexo.Id"><img src="~/content/images/application-edit-icon.png" />editar</a>
+                                @:<a href="~/Anexos/Edit?id=@anexo.Id"><img src="@Url.Content("~/content/images/")application-edit-icon.png" />editar</a>
                                 @:</i>
                                 @:
                             @:</p>
@@ -80,7 +83,7 @@
                                         @:<h2>@Model.Identificador.@Model.Consecutivo.@grupo.Anexo.Consecutivo.@grupo.Consecutivo @grupo.NombreGrupo</h2>
                                         @:<h3>@grupo.Preguntas.Count Preguntas</h3>
                                         @:<p>
-                                            <a href="~/Grupos/Edit?id=@grupo.Id"><img src="~/content/images/application-edit-icon.png" />editar</a>
+                                            <a href="~/Grupos/Edit?id=@grupo.Id"><img src="@Url.Content("~/content/images/")application-edit-icon.png" />editar</a>
                                             @:</i>
                                         @:</p>
                                         @:                                    </div>
@@ -94,18 +97,18 @@
     {
         if (pregunta.Activo)
         {
-            @:<p><a href="~/Preguntas/Edit?id=@pregunta.Id"><img src="~/content/images/application-edit-icon.png" /></a> <strong>@pregunta.Descripcion </strong></p>
+            @:<p><a href="@Url.Content("~/Preguntas/Edit?id=")@pregunta.Id"><img src="@Url.Content("~/content/images/")application-edit-icon.png" /></a> <strong>@pregunta.Descripcion </strong></p>
         }
         else
         {
-            @:<p><a href="~/Preguntas/Edit?id=@pregunta.Id"><img src="~/content/images/application-edit-icon.png" /></a> @pregunta.Descripcion</p>
+            @:<p><a href="@Url.Content("~/Preguntas/Edit?id=")@pregunta.Id"><img src="@Url.Content("~/content/images/")application-edit-icon.png" /></a> @pregunta.Descripcion</p>
         }
 
     }
     @:</div>
                             @:<div class="pricing-table-sign-up">
                            
-                                @:<a href="~/Preguntas/Create?idGrupo=@grupo.Id" data-scroll class="btn btn-light btn-radius btn-brd grd1 effect-1">Agregar Pregunta</a>
+                                @:<a href="@Url.Content("~/Preguntas/Create?idGrupo=")@grupo.Id" data-scroll class="btn btn-light btn-radius btn-brd grd1 effect-1">Agregar Pregunta</a>
                                 @:                            </div>
                             @:                        </div>
                         @:                    </div>
@@ -124,9 +127,9 @@
                 Agregar
             </button>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="~/Dominios/Create">Dominio</a><br>
-                <a class="dropdown-item" href="~/Anexos/Create?idDominio=@Model.Id">Anexo</a><br>
-                <a class="dropdown-item" id="btnAdd" href="~/Grupos/Create?idDominio=@Model.Id&idAnexo=" onclick="return validarAnexo();">Grupo</a>
+                <a class="dropdown-item" href="@Url.Content("~/Dominios/Create")">Dominio</a><br>
+                <a class="dropdown-item" href="@Url.Content("~/Anexos/Create?idDominio=")@Model.Id">Anexo</a><br>
+                <a class="dropdown-item" id="btnAdd" href="" onclick="return validarAnexo();">Grupo</a>
             </div>
         </div>
 
