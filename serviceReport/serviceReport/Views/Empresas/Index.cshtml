@@ -36,6 +36,9 @@
                     <div class="price-tit text-center">
                         <h2>@Html.DisplayFor(modelItem => item.NombreContactoEntidad)</h2>
                         <p><img src="@item.UrlLogo" width="80" height="80" /> </p>
+                        <p>
+                            <a href="~/Empresas/Edit?id=@item.Id "><img src="@Url.Content("~/content/images/")application-edit-icon.png" />  Editar</a>
+                        </p>
                     </div>
                     <div class="para">
                         <!--<p>1 Anexo</p>

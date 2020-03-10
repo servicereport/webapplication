@@ -39,7 +39,13 @@ namespace serviceReport.Areas.Auditoria.Controllers
         public ActionResult Configurar(int? idAuditoria)
         {
             var auditoria = db.Auditorias.Where(a => a.Id == idAuditoria).First();
-            var dominios = db.Dominios.Where(d => d.Activo == true).ToList();
+            //var dominios = db.Dominios.Where(d => d.Activo == true).ToList();
+            var dominios = (from d in db.Dominios
+                            join a in db.Anexos on d.Id equals a.IdDominio
+                            join g in db.Grupos on a.Id equals g.IdAnexo
+                            join p in db.Preguntas on g.Id equals p.IdGrupo
+                            where d.Activo == true
+                            select d).Distinct().ToList();
 
             auditoria.Auditor = db.Usuarios.Where(a => a.Id == auditoria.IdAuditor).FirstOrDefault();
             auditoria.Estado = db.Estados.Where(a => a.Id == auditoria.IdEstadoAuditoria).FirstOrDefault();
@@ -227,7 +233,6 @@ namespace serviceReport.Areas.Auditoria.Controllers
                                      where r.IdPregunta == idPregunta
                                         && r.IdAuditoria == idAuditoria 
                                      select c).FirstOrDefault();
-
                     auditoria.Dominios[i].Preguntas[j].Respuesta = respuesta;
 
                     if(respuesta == null)
@@ -241,25 +246,28 @@ namespace serviceReport.Areas.Auditoria.Controllers
         }
 
         [HttpGet]
-        public bool Responder(int idAuditoria, int idPregunta, int idRespuesta)
+        public bool Responder(int idAuditoria, int idPregunta, int idRespuesta, int idDominioAuditoria)
         {
+            int idDominio = db.DominiosAuditoria.Find(idDominioAuditoria).IdAuditoria;
             var current = db.Respuestas.Where(ad => ad.IdAuditoria == idAuditoria && ad.IdPregunta == idPregunta).ToList();
             if (current.Any())
             {
                 var respuesta = db.Respuestas.Find(current.First().Id);
+                respuesta.IdDominio = idDominio;
                 respuesta.IdCalificacion = idRespuesta;
                 db.Entry(respuesta).State = EntityState.Modified;
-                db.SaveChanges();
                 db.SaveChanges();
             }
             else
             {
+                
                 db.Respuestas.Add(new AuditoriaRespuestas()
                 {
                     IdAuditoria = idAuditoria,
                     IdPregunta = idPregunta,
-                    IdCalificacion = idRespuesta
-                });
+                    IdCalificacion = idRespuesta,
+                    IdDominio = idDominio
+            });
                 db.SaveChanges();
             }
             return true;

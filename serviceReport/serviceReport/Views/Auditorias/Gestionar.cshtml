@@ -16,11 +16,11 @@
             document.getElementById("btn_confirmar").classList.remove('btn-warning');
             document.getElementById("btn_confirmar").value = "Confirmar!";
 
-            document.getElementById("resumen").innerHTML = "Disponible para confirmar!";
+            document.getElementById("resumen").value = "Disponible para confirmar!";
             document.getElementById("resumen").classList.add('btn-success');
         }
         else {
-            document.getElementById("resumen").innerHTML = "Pendientes:  " + totalPendientes + " de " + totalPreguntas;
+            document.getElementById("resumen").value = "Pendientes:  " + totalPendientes + " de " + totalPreguntas;
             document.getElementById("btn_confirmar").value = "Pendientes:" + totalPendientes;
         }
         
@@ -99,7 +99,7 @@
                     <button id="btn_@pregunta.Id" type="button" class='btn @(pregunta.Respuesta==null?"btn-info":"btn-success")' dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         @pregunta.Descripcion
                     </button>
-                    <div class="dropdown-menu">
+                    <div class="dropdown-menu" style="margin-left:50%">
                         <!-- Dropdown menu links -->
 
                         @foreach (var respuesta in ViewBag.Respuestas)
@@ -124,7 +124,7 @@
         var idAuditoria = @Model.Id;
         $.ajax({
             type: "GET",
-            url: "responder?idAuditoria=" + idAuditoria + "&idPregunta=" + idPregunta + "&idRespuesta=" + idRespuesta,
+            url: "responder?idAuditoria=" + idAuditoria + "&idPregunta=" + idPregunta + "&idRespuesta=" + idRespuesta + "&idDominioAuditoria=" + idDominio,
             //data: data,
             success: function () {
 

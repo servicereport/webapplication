@@ -13,7 +13,7 @@ namespace serviceReport.Models.ISO
 
         public string NombreNivel { get; set; }
 
-        public string Porcentaje { get; set; }
+        public int Porcentaje { get; set; }
 
         public string Criterio { get; set; }
     }

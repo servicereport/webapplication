@@ -22,6 +22,8 @@ namespace serviceReport.Models.Auditoria
 
         public string UrlLogo { get; set; }
 
+        public bool Activo { get; set; }
+
         public List<Auditoria> Auditorias { get; set; }
     }
 }

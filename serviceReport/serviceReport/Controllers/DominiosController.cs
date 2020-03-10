@@ -19,7 +19,7 @@ namespace serviceReport.Areas.ISO.Controllers
         // GET: ISO/Dominios
         public ActionResult Index()
         {
-            return View(db.Dominios.ToList());
+            return View(db.Dominios.Where(d=> d.Activo==true).ToList());
         }
 
 
@@ -53,6 +53,7 @@ namespace serviceReport.Areas.ISO.Controllers
         {
             if (ModelState.IsValid)
             {
+                dominio.Activo = true;
                 db.Dominios.Add(dominio);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -81,7 +82,7 @@ namespace serviceReport.Areas.ISO.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,NombreDominio,Identificador,Consecutivo")] Dominio dominio)
+        public ActionResult Edit([Bind(Include = "Id,NombreDominio,Identificador,Consecutivo,Activo")] Dominio dominio)
         {
             if (ModelState.IsValid)
             {

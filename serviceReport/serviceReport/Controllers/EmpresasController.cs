@@ -18,7 +18,7 @@ namespace serviceReport.Areas.Auditoria.Controllers
         // GET: Auditoria/Empresas
         public ActionResult Index()
         {
-            return View(db.Empresas.ToList());
+            return View(db.Empresas.Where(e=> e.Activo).ToList());
         }
 
         // GET: Auditoria/Empresas/Details/5
